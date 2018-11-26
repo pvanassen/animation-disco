@@ -1,8 +1,8 @@
 package nl.pvanassen.christmas.tree.animation.disco.animation
 
-import nl.pvanassen.christmas.tree.animation.disco.SimplexNoise
 import nl.pvanassen.christmas.tree.animation.common.model.TreeModel
-import nl.pvanassen.christmas.tree.animation.common.util.Utils
+import nl.pvanassen.christmas.tree.animation.common.util.ColorUtils
+import nl.pvanassen.christmas.tree.animation.disco.SimplexNoise
 import nl.pvanassen.christmas.tree.canvas.Canvas
 import javax.inject.Singleton
 
@@ -20,7 +20,7 @@ class Disco(private val canvas: Canvas, treeModel: TreeModel) {
         for (x in 0 until strips) {
             for (y in 1..59) {
                 val hue = SimplexNoise.sumOctave(16, x.toDouble(), y.toDouble(), zAxis, 0.5, SCALE, 0f, 1f).toFloat()
-                canvas.setValue(x, y, Utils.makeColorHSB(hue, 1f, intensity))
+                canvas.setValue(x, y, ColorUtils.makeColorHSB(hue, 1f, intensity))
             }
         }
         return canvas.getValues()
