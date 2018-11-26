@@ -15,3 +15,7 @@ For Zipkin:
 - ZIPKIN_HOST
 - ZIPKIN_PORT
 - ZIPKIN_PROBABILITY
+
+For the leds itself: 
+- LED_STRIPS
+- LEDS_PER_STRIP
