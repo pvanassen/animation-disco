@@ -1,11 +1,11 @@
 package nl.pvanassen.christmas.tree.animation.disco.controller
 
-import io.micronaut.websocket.annotation.ServerWebSocket
-import nl.pvanassen.christmas.tree.animation.disco.animation.Disco
+import io.micronaut.http.annotation.Controller
 import nl.pvanassen.christmas.tree.animation.common.controller.AnimationController
+import nl.pvanassen.christmas.tree.animation.disco.animation.Disco
 
-@ServerWebSocket("/animation")
+@Controller
 class DiscoController(private val disco: Disco): AnimationController() {
 
-    override fun tick() = disco.tick()
+    override fun getFrame() = disco.tick()
 }
