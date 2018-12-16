@@ -13,9 +13,12 @@ class Disco(private val canvas: Canvas, treeModel: TreeModel): Animation {
 
     private val strips:Int = treeModel.strips
 
-    override fun getFrame(): ByteArray {
+    override fun getFrame(seed:Long, frame:Int, nsPerFrame:Int): ByteArray {
         zAxis += Math.random()
-        val n = System.currentTimeMillis() * 0.001f * 200 / 100f
+        val msPerFrame = nsPerFrame / 1_000_000
+        val msSinceStart = frame * msPerFrame
+
+        val n = (seed + msSinceStart) * 0.001f * 200 / 100f
         val intensity = SimplexNoise.sumOctave(16, n.toDouble(), zAxis, zAxis, 0.5, Z_SCALE, 0f, 1f).toFloat()
 
         for (x in 0 until strips) {
