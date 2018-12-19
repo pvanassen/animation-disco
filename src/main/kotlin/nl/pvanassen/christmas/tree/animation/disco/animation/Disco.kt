@@ -15,16 +15,11 @@ class Disco(private val canvas: Canvas, private val treeModel: TreeModel): Anima
 
     override fun getFrame(seed:Long, frame:Int, nsPerFrame:Int): ByteArray {
         zAxis += Math.random()
-        val msPerFrame = nsPerFrame / 1_000_000
-        val msSinceStart = frame * msPerFrame
-
-        val n = (seed + msSinceStart) * 0.001f * 200 / 100f
-        val intensity = SimplexNoise.sumOctave(16, n.toDouble(), zAxis, zAxis, 0.5, Z_SCALE, 0f, 1f).toFloat()
 
         for (x in 0 until strips) {
             for (y in 1 until treeModel.ledsPerStrip) {
-                val hue = SimplexNoise.sumOctave(16, x.toDouble(), y.toDouble(), zAxis, 0.5, SCALE, 0f, 1f).toFloat()
-                canvas.setValue(x, y, ColorUtils.makeColorHSB(hue, 1f, intensity))
+                val hue = SimplexNoise.sumOctave(8, x.toDouble(), y.toDouble(), zAxis, 0.5, SCALE, 0f, 1f).toFloat()
+                canvas.setValue(x, y, ColorUtils.makeColorHSB(hue, 1f, 1f))
             }
         }
         return canvas.getValues()
