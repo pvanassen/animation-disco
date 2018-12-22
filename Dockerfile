@@ -1,9 +1,10 @@
-FROM oracle/graalvm-ce:1.0.0-rc9
+FROM oracle/graalvm-ce:1.0.0-rc10
 EXPOSE 8080
 COPY target/christmas-tree-animation-disco-*.jar christmas-tree-animation-disco.jar
 ADD . target
 RUN java -cp christmas-tree-animation-disco.jar io.micronaut.graal.reflect.GraalClassLoadingAnalyzer \
     && native-image --no-server \
+             --allow-incomplete-classpath \
              --class-path christmas-tree-animation-disco.jar \
              --report-unsupported-elements-at-runtime \
              -H:ReflectionConfigurationFiles=target/reflect.json \
