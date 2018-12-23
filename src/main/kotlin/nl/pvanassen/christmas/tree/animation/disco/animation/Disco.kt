@@ -18,8 +18,8 @@ class Disco(private val canvas: Canvas, private val treeModel: TreeModel): Anima
 
         for (x in 0 until strips) {
             for (y in 0 until treeModel.ledsPerStrip) {
-                val hue = SimplexNoise.sumOctave(8, x.toDouble(), y.toDouble(), zAxis, 0.5, SCALE, 0f, 1f).toFloat()
-                canvas.setValue(x, y, ColorUtils.makeColorHSB(hue, 1f, 1f))
+                val hue = SimplexNoise.sumOctave(8, x.toDouble(), y.toDouble(), zAxis, 0.5, SCALE, -0.2f, 1.2f)
+                canvas.setValue(x, y, ColorUtils.makeColorHSB(Math.max(0.0, Math.min(1.0, hue)).toFloat(), 1f, 1f))
             }
         }
         return canvas.getValues()
