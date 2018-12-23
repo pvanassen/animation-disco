@@ -17,7 +17,7 @@ class Disco(private val canvas: Canvas, private val treeModel: TreeModel): Anima
         zAxis += Math.random()
 
         for (x in 0 until strips) {
-            for (y in 1 until treeModel.ledsPerStrip) {
+            for (y in 0 until treeModel.ledsPerStrip) {
                 val hue = SimplexNoise.sumOctave(8, x.toDouble(), y.toDouble(), zAxis, 0.5, SCALE, 0f, 1f).toFloat()
                 canvas.setValue(x, y, ColorUtils.makeColorHSB(hue, 1f, 1f))
             }
@@ -27,6 +27,5 @@ class Disco(private val canvas: Canvas, private val treeModel: TreeModel): Anima
 
     companion object {
         private const val SCALE = 0.04
-        private const val Z_SCALE = 0.00005
     }
 }
