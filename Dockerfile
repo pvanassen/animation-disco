@@ -1,7 +1,7 @@
 FROM maven:3-eclipse-temurin-17 AS jar-builder
 COPY pom.xml pom.xml
 COPY src src
-RUN --mount=type=cache,target=/root/.m2 mvn clean install -Dgpg.skip=true
+RUN --mount=type=cache,target=/root/.m2 mvn -U clean install -Dgpg.skip=true
 
 FROM ghcr.io/graalvm/graalvm-ce:ol9-java17-22 AS builder
 
