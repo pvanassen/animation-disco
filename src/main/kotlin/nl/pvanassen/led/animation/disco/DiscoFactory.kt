@@ -8,9 +8,9 @@ import nl.pvanassen.led.animation.common.model.Registration
 
 class DiscoFactory: AnimationFactory<Any> {
     override fun getAnimation(canvas: Canvas, pixels: List<Int>, config: ApplicationConfig): Animation<Any> =
-        Disco(canvas, pixels)
+        Disco(canvas, pixels, config.property("app.scale").getString().toDouble())
 
 
-    override fun getRegistrationInfo() = Registration("disco")
+    override fun getRegistrationInfo(config: ApplicationConfig) = Registration(config.property("app.name").getString())
 
 }

@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage
 import kotlin.math.max
 import kotlin.math.min
 
-class Disco(private val canvas: Canvas, private val pixels: List<Int>): Animation<Any> {
+class Disco(private val canvas: Canvas, pixels: List<Int>, private val scale: Double): Animation<Any> {
     private var zAxis = Math.random()
 
     private val buffer = BufferedImage(pixels.size, pixels.max(), BufferedImage.TYPE_INT_RGB)
@@ -18,8 +18,8 @@ class Disco(private val canvas: Canvas, private val pixels: List<Int>): Animatio
 
         (0 until buffer.width).forEach { x ->
             (0 until buffer.height).forEach { y ->
-                val hue = SimplexNoise.sumOctave(8, x.toDouble(), y.toDouble(), zAxis, 0.5, SCALE, -0.2f, 1.2f)
-                val brightness = SimplexNoise.sumOctave(16, x.toDouble(), y.toDouble(), -zAxis, 0.5, SCALE * 2, -0.1f, 2.2f)
+                val hue = SimplexNoise.sumOctave(8, x.toDouble(), y.toDouble(), zAxis, 0.5, scale, -0.2f, 1.2f)
+                val brightness = SimplexNoise.sumOctave(16, x.toDouble(), y.toDouble(), -zAxis, 0.5, scale * 2, -0.1f, 2.2f)
                 buffer.setRGB(x, y, ColorUtils.makeColorHSB(max(0.0, min(1.0, hue)).toFloat(), 1f, max(0.0, min(1.0, brightness)).toFloat()))
             }
         }
@@ -28,9 +28,5 @@ class Disco(private val canvas: Canvas, private val pixels: List<Int>): Animatio
         canvas.drawImage(scaled)
 
         return canvas.getValues()
-    }
-
-    companion object {
-        private const val SCALE = 0.002
     }
 }
